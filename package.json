@@ -1,0 +1,10 @@
+{
+  "name": "fs-front-end-project",
+  "private": true,
+  "version": "0.0.1",
+  "dependencies": {
+    "express"     : "~4.9.0",
+    "body-parser" : "~1.9.0",
+    "cors"        : "2.7.1"
+  }
+}

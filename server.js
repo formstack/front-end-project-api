@@ -16,40 +16,49 @@
     res.send('Main page.');
   });
 
+  var folders  = require('./fixtures/folders.json'),
+      files    = require('./fixtures/files.json'),
+      key      = '',
+      fixtures = {};
+
+  for (key in folders) {
+    if (!folders.hasOwnProperty(key)) {
+      continue;
+    }
+
+    fixtures[key] = folders[key];
+  }
+
+  for (key in files) {
+    if (!files.hasOwnProperty(key)) {
+      continue;
+    }
+
+    fixtures[key] = files[key];
+  }
+
   // REST API ROUTING
   // ----------------
 
   // ls
-  router.route('/ls')
-
-  .get(function(req, res) {
-    res.json({ message: 'test all' });
-  });
-
   router.route('/ls/:id')
 
   .get(function(req, res) {
-    res.json({ message: 'id: ' + req.params.id });
+    res.json({ item: fixtures[req.params.id] });
   });
 
   // cat
-  router.route('/cat')
-
-  .get(function(req, res) {
-    res.json({ message: 'test all' });
-  });
-
   router.route('/cat/:id')
 
   .get(function(req, res) {
-    res.json({ message: 'id: ' + req.params.id });
+    res.json({ content: fixtures[req.params.id].content });
   });
 
   // autocomplete
   router.route('/autocomplete/:text')
 
   .get(function(req, res) {
-    res.json({ message: 'id: ' + req.params.text });
+    res.json({ results: 'id: ' + req.params.text });
   });
 
   // -----------

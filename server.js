@@ -46,7 +46,7 @@
   router.route('/ls/:id')
 
   .get(function(req, res) {
-    if (!fixtures[req.params.id]) {
+    if (typeof fixtures[req.params.id] === 'undefined') {
       res.status(404).send('That item was not found.');
 
       return;
@@ -64,7 +64,15 @@
         }
 
         if (fixtures[key].parent === req.params.id) {
-          responseItems[key] = fixtures[key];
+          // formulate a stripped down response
+          var responseFixture = fixtures[key];
+
+          responseFixture.name = formatFilename(responseFixture);
+          delete responseFixture.parent;
+          delete responseFixture.extension;
+          delete responseFixture.content;
+
+          responseItems[key] = responseFixture;
         }
       }
 
@@ -73,7 +81,7 @@
 
     // if the item is a fole, return the filename
     if (currentFixture.type === 'file') {
-      res.json({ items: currentFixture.name + '.' + currentFixture.extension });
+      res.json({ items: [formatFilename(currentFixture)] });
     }
   });
 
@@ -81,7 +89,7 @@
   router.route('/cat/:id')
 
   .get(function(req, res) {
-    if (!fixtures[req.params.id]) {
+    if (typeof fixtures[req.params.id] === 'undefined') {
       res.status(404).send('That item was not found.');
 
       return;
@@ -105,6 +113,17 @@
 
   // -----------
   // END ROUTING
+
+  // util functions
+  var formatFilename = function(item) {
+    if (item.type === 'file') {
+      return item.name + '.' + item.extension;
+    }
+
+    if (item.type === 'folder') {
+      return item.name;
+    }
+  };
 
   server.use('/api', router);
   server.listen(8080);

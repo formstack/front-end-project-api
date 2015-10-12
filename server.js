@@ -44,6 +44,12 @@
   router.route('/ls/:id')
 
   .get(function(req, res) {
+    if (!fixtures[req.params.id]) {
+      res.status(404).send('That item was not found.');
+
+      return;
+    }
+
     res.json({ item: fixtures[req.params.id] });
   });
 
@@ -51,6 +57,12 @@
   router.route('/cat/:id')
 
   .get(function(req, res) {
+    if (!fixtures[req.params.id]) {
+      res.status(404).send('That item was not found.');
+
+      return;
+    }
+
     res.json({ content: fixtures[req.params.id].content });
   });
 
@@ -58,7 +70,13 @@
   router.route('/autocomplete/:text')
 
   .get(function(req, res) {
-    res.json({ results: 'id: ' + req.params.text });
+    if (!req.params.text) {
+      res.status(400).send('You must supply a search string.');
+
+      return;
+    }
+
+    res.json({ results: req.params.text });
   });
 
   // -----------

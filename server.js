@@ -27,6 +27,7 @@
     }
 
     fixtures[key] = folders[key];
+    fixtures[key].type = 'folder';
   }
 
   for (key in files) {
@@ -35,6 +36,7 @@
     }
 
     fixtures[key] = files[key];
+    fixtures[key].type = 'file';
   }
 
   // REST API ROUTING
@@ -50,7 +52,29 @@
       return;
     }
 
-    res.json({ item: fixtures[req.params.id] });
+    var currentFixture = fixtures[req.params.id];
+
+    // if the item is a folder, return the contents
+    if (currentFixture.type === 'folder') {
+      var responseItems = {};
+
+      for (key in fixtures) {
+        if (!fixtures.hasOwnProperty(key)) {
+          continue;
+        }
+
+        if (fixtures[key].parent === req.params.id) {
+          responseItems[key] = fixtures[key];
+        }
+      }
+
+      res.json({ items: responseItems });
+    }
+
+    // if the item is a fole, return the filename
+    if (currentFixture.type === 'file') {
+      res.json({ items: currentFixture.name + '.' + currentFixture.extension });
+    }
   });
 
   // cat

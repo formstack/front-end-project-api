@@ -1,0 +1,38 @@
+{
+  "0" : {
+    "parent"    : 0,
+    "name"      : "package",
+    "extension" : "json",
+    "content"   : ""
+  },
+  "1" : {
+    "parent"    : 0,
+    "name"      : "about",
+    "extension" : "txt",
+    "content"   : ""
+  },
+  "2" : {
+    "parent"    : 1,
+    "name"      : "app",
+    "extension" : "js",
+    "content"   : ""
+  },
+  "3" : {
+    "parent"    : 1,
+    "name"      : "deps",
+    "extension" : "js",
+    "content"   : ""
+  },
+  "4" : {
+    "parent"    : 1,
+    "name"      : "config",
+    "extension" : "json",
+    "content"   : ""
+  },
+  "5" : {
+    "parent"    : 2,
+    "name"      : "index",
+    "extension" : "html",
+    "content"   : ""
+  }
+}

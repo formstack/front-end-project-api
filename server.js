@@ -64,15 +64,10 @@
         }
 
         if (fixtures[key].parent === req.params.id) {
-          // formulate a stripped down response
-          var responseFixture = fixtures[key];
+          // formulate a stripped down response, make sure to copy
+          var responseFixture = JSON.parse(JSON.stringify(fixtures[key]));;
 
-          responseFixture.name = formatFilename(responseFixture);
-          delete responseFixture.parent;
-          delete responseFixture.extension;
-          delete responseFixture.content;
-
-          responseItems[key] = responseFixture;
+          responseItems[key] = slimReponse(responseFixture, true);
         }
       }
 
@@ -112,12 +107,31 @@
 
   .get(function(req, res) {
     if (!req.params.text) {
-      res.status(400).send('You must supply a search string.');
+      res.status(400).send('You must supply an autocomplete string.');
 
       return;
     }
 
-    res.json({ results: req.params.text });
+    var responseItems = {};
+
+    for (key in fixtures) {
+      if (!fixtures.hasOwnProperty(key)) {
+        continue;
+      }
+
+      var currentFixture = fixtures[key],
+          currentName    = formatFilename(currentFixture);
+
+      if (currentName.substr(0, req.params.text.length) == req.params.text) {
+        var responseFixture = JSON.parse(JSON.stringify(currentFixture));
+
+        responseFixture.name = currentName;
+
+        responseItems[key] = slimReponse(responseFixture);
+      }
+    }
+
+    res.json({ items: responseItems });
   });
 
   // -----------
@@ -133,6 +147,19 @@
       return item.name;
     }
   };
+
+  var slimReponse = function(item, generateName) {
+    // only generate a name if asked
+    if (generateName) {
+      item.name = formatFilename(item);
+    }
+
+    delete item.parent;
+    delete item.extension;
+    delete item.content;
+
+    return item;
+  }
 
   server.use('/api', router);
   server.listen(8080);

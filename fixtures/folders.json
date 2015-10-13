@@ -1,13 +1,13 @@
 {
   "0" : {
-    "name"      : "root"
+    "name" : "root"
   },
   "1" : {
-    "parent"    : "0",
-    "name"      : "js"
+    "parent" : "0",
+    "name"   : "js"
   },
   "2" : {
-    "parent"    : "0",
-    "name"      : "html"
+    "parent" : "0",
+    "name"   : "html"
   }
 }

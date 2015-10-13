@@ -103,11 +103,14 @@
   });
 
   // autocomplete
-  router.route('/autocomplete/:text')
+  router.route('/autocomplete/:folder/:text?')
 
   .get(function(req, res) {
-    if (!req.params.text) {
-      res.status(400).send('You must supply an autocomplete string.');
+    // target the root folder if no folder is specified
+    var folderId = req.params.folder || "0";
+
+    if (fixtures[folderId].type !== 'folder') {
+      res.status(404).send('You can only autocomplete on a folder.');
 
       return;
     }
@@ -122,7 +125,11 @@
       var currentFixture = fixtures[key],
           currentName    = formatFilename(currentFixture);
 
-      if (currentName.substr(0, req.params.text.length) == req.params.text) {
+      if (currentFixture.parent !== folderId) {
+        continue;
+      }
+
+      if (!req.params.text || currentName.substr(0, req.params.text.length) == req.params.text) {
         var responseFixture = JSON.parse(JSON.stringify(currentFixture));
 
         responseFixture.name = currentName;

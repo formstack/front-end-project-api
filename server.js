@@ -79,7 +79,7 @@
       res.json({ items: responseItems });
     }
 
-    // if the item is a fole, return the filename
+    // if the item is a file, return the filename
     if (currentFixture.type === 'file') {
       res.json({ items: [formatFilename(currentFixture)] });
     }
@@ -95,7 +95,16 @@
       return;
     }
 
-    res.json({ content: fixtures[req.params.id].content });
+    var currentFixture = fixtures[req.params.id];
+
+    // if the fixture is a folder, return an error
+    if (currentFixture.type === 'folder') {
+      res.status(400).send(currentFixture.name + ': Is a directory');
+
+      return;
+    }
+
+    res.json({ content: currentFixture.content });
   });
 
   // autocomplete

@@ -3,36 +3,36 @@
     "parent"    : "0",
     "name"      : "package",
     "extension" : "json",
-    "content"   : ""
+    "content"   : "{\n  \"name\": \"fs-front-end-project\",\n  \"private\": true,\n  \"version\": \"0.0.1\",\n  \"dependencies\": {\n    \"express\"     : \"~4.9.0\",\n    \"body-parser\" : \"~1.9.0\",\n    \"cors\"        : \"2.7.1\"\n  }\n}"
   },
   "4" : {
     "parent"    : "0",
     "name"      : "about",
     "extension" : "txt",
-    "content"   : ""
+    "content"   : "  ______                       _             _     \n |  ____|                     | |           | |    \n | |__ ___  _ __ _ __ ___  ___| |_ __ _  ___| | __ \n |  __\/ _ \\| '__| '_ ` _ \/ __| __\/ _` |\/ __| |\/ \/ \n | | | (_) | |  | | | | | \\__ \\ || (_| | (__|   <  \n |_|  \\___\/|_|  |_| |_| |_|___\/\\__\\__,_|\\___|_|\\_\\ \n\n===================================================\n\nYou've found us! That's super-excellent, our new Front-End applicant.\n\nIf you haven't already, you really should get to know some of our team members (including pictures from when we were kids): https:\/\/www.formstack.com\/about\n\nWe also have a team making a brand new product... Flock! They're all about managing remote teams by sharing a daily status... and a lot more, really. You should check them out as well: https:\/\/heyflock.com\/about\n\nHave fun, we hope to meet you soon!\n"
   },
   "5" : {
     "parent"    : "1",
     "name"      : "app",
     "extension" : "js",
-    "content"   : ""
+    "content"   : "(function() {\n  'use strict';\n\n var module = angular.module('app', [\n    'dep1',\n    'awesome-dep1',\n    'dep2',\n    'mandatory-dep1'\n  ]);\n\n function run($rootScope) {\n  console.log('There\\'s some awesome setup going on around these parts.');\n  }\n\n module.run(['$rootScope', run]);\n  })();\n"
   },
   "6" : {
     "parent"    : "1",
-    "name"      : "deps",
-    "extension" : "js",
-    "content"   : ""
+    "name"      : "",
+    "extension" : "env",
+    "content"   : "# Mongo\nMONGO_USER=user\nMONGO_PASSWORD=password\nMONGO_HOST=127.0.0.1\nMONGO_PORT=00000\nMONGO_DB=db\n\n# Google Auth\nREST_PORT=0000\nAPP_SECRET=000000000000\nGOOGLE_SECRET=000000000000\n"
   },
   "7" : {
     "parent"    : "1",
     "name"      : "config",
-    "extension" : "json",
-    "content"   : ""
+    "extension" : "js",
+    "content"   : "(function() {\n  'use strict';\n\n  module.exports = {\n    mongo: {\n      user     : process.env.MONGO_USER,\n      password : process.env.MONGO_PASSWORD,\n      host     : process.env.MONGO_HOST,\n      port     : process.env.MONGO_PORT,\n      db       : process.env.MONGO_DB\n    },\n\n    port         : process.env.REST_PORT,\n    tokenSecret  : process.env.APP_SECRET,\n    googleSecret : process.env.GOOGLE_SECRET\n  };\n})();"
   },
   "8" : {
     "parent"    : "2",
     "name"      : "index",
     "extension" : "html",
-    "content"   : ""
+    "content"   : "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>FS Front-End Applicant Project<\/title>\n<\/head>\n<body>\n  <h1>FS Front-End Applicant Project<\/h1>\n  <p>Just a little sample html that would be returned by all this stuff we've got going on here.<\/p>\n<\/body>\n<\/html>"
   }
 }

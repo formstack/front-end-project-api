@@ -3,7 +3,9 @@
 
   var express    = require('express'),
       bodyParser = require('body-parser'),
-      cors       = require('cors');
+      cors       = require('cors'),
+      filesystem = require('fs'),
+      marked     = require('marked');
 
   var server = express(),
       router = express.Router();
@@ -13,7 +15,10 @@
 
   // let's display the readme
   server.get('/', function(req, res) {
-    res.send('Main page.');
+    var readmePath    = __dirname + '/readme.md',
+        readmeContent = filesystem.readFileSync(readmePath, 'utf8');
+
+    res.send(marked(readmeContent));
   });
 
   var folders  = require('./fixtures/folders.json'),

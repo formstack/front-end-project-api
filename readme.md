@@ -78,5 +78,3 @@ Returns a list of files / folders that match the supplied search string. If no s
   }
 }
 ```
-
-## Project requirements / examples

@@ -1,6 +1,16 @@
 {
-  "name": "fs-front-end-project",
-  "private": true,
+  "name": "fs-front-end-project-api",
+  "description" : "API to be used for the Front-End development project for Formstack applicants.",
+  "author" : {
+    "name"  : "Dana Hartweg",
+    "email" : "dana.hartweg@formstack.com"
+  },
+  "contributors" : [
+    {
+      "name"  : "Maciej Podsiedlak",
+      "email" : "maciej.podsiedlak@formstack.com"
+    }
+  ],
   "version": "0.0.1",
   "dependencies": {
     "express"     : "~4.9.0",
